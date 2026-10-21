@@ -39,3 +39,16 @@ The corresponding live labels use the `factory:` prefix, for example
 - notes: `src/auth/**` is load-bearing, so this cannot be auto-implemented despite being simple. Route through factory-spec or implement with a forced human read.
 
 ---
+
+## FQ-1: Add an About page
+- disposition: ready-to-implement
+- source: https://github.com/pratapsuraj1/testFactory/issues/1
+- last_triaged: 2026-10-21
+- spec: docs/factory/specs/FQ-1/
+- files_expected: WebApplication1/Controllers/HomeController.cs, WebApplication1/Views/Home/About.cshtml, WebApplication1/Views/Shared/_Layout.cshtml, WebApplication1.slnx, WebApplication1.Tests/WebApplication1.Tests.csproj, WebApplication1.Tests/HomeControllerTests.cs
+- load_bearing: true
+- gate_level: deep
+- done_when: `GET /Home/About` renders an "About" page with the approved paragraph, nav has an About link, `dotnet build` and `dotnet test` pass, and the new controller test fails when the `About` action is removed
+- confidence: medium
+- notes: Touches `*.slnx` and a new `*.csproj` (load-bearing); draft PR needs a human read. Gates are MISCONFIGURED for .NET until a human adds a dotnet block to `.claude/scripts/gates.sh` and `test` to `.factory/gates.conf`. Human chose ready-to-implement at spec approval; expect a stop at the gates if unresolved.
+---

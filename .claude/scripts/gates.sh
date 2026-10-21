@@ -180,7 +180,7 @@ if [ "$LEVEL" = "full" ] || [ "$LEVEL" = "deep" ]; then
       run build go build ./...
       ;;
     dotnet)
-      if dotnet_has_tests; then run test dotnet test "$DOTNET_TARGET" --nologo --no-build
+      if dotnet_has_tests; then run test dotnet test "$DOTNET_TARGET" --nologo
       else skip test "no test project (Microsoft.NET.Test.Sdk)"; fi
       if has dotnet; then run build dotnet build "$DOTNET_TARGET" --nologo
       else skip build "dotnet not installed"; fi
@@ -211,7 +211,7 @@ if [ "$LEVEL" = "deep" ]; then
       if has govulncheck; then run audit govulncheck ./...; else skip audit "govulncheck not installed"; fi
       ;;
     dotnet)
-      skip audit "no dotnet audit command mapped"
+      run audit bash -c "! dotnet list \"$DOTNET_TARGET\" package --vulnerable --include-transitive 2>&1 | tee /dev/stderr | grep -q 'has the following vulnerable packages'"
       skip mutation "no dotnet mutation command mapped"
       ;;
     *)
