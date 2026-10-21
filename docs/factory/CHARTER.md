@@ -10,7 +10,7 @@ not continuously.
 Set this to `ready` only after reviewing every section:
 
 ```
-CHARTER_STATUS: incomplete
+CHARTER_STATUS: ready
 ```
 
 ---
